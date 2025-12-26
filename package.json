@@ -1,0 +1,34 @@
+{
+    "name": "vscode-archery-game",
+    "displayName": "Archery Game",
+    "description": "A lightweight archery game for VS Code",
+    "version": "0.0.2",
+    "publisher": "PrinceGarg",
+    "icon": "media/icon.png",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "archery.start",
+                "title": "Start Archery Game"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.80.0",
+        "@types/node": "^18.0.0",
+        "typescript": "^5.1.0"
+    }
+}
