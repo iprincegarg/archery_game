@@ -1,8 +1,9 @@
 {
     "name": "vscode-archery-game",
-    "displayName": "Archery Game",
-    "description": "A lightweight archery game for VS Code",
-    "version": "0.0.2",
+    "displayName": "Archery Master",
+    "description": "A lightweight archery master game for VS Code",
+    "version": "0.0.7",
+    "license": "MIT",
     "publisher": "PrinceGarg",
     "icon": "media/icon.png",
     "engines": {
@@ -17,7 +18,7 @@
         "commands": [
             {
                 "command": "archery.start",
-                "title": "Start Archery Game"
+                "title": "Start Archery Master"
             }
         ]
     },

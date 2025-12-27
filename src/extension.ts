@@ -3,12 +3,12 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Archery Game extension is now active!');
+    console.log('Archery Master extension is now active!');
 
     let disposable = vscode.commands.registerCommand('archery.start', () => {
         const panel = vscode.window.createWebviewPanel(
             'archeryGame',
-            'Archery Game',
+            'Archery Master',
             vscode.ViewColumn.One,
             {
                 enableScripts: true,

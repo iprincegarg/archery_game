@@ -202,25 +202,47 @@ function draw() {
     // Clear
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw Bow (Simple curve)
-    ctx.beginPath();
-    ctx.arc(bow.x, bow.y, 40, 1.5 * Math.PI, 0.5 * Math.PI);
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = bow.color;
-    ctx.stroke();
+    // Recurve Bow Settings (Reversed/Rotated 180)
+    const bowTipX = bow.x - 10;
+    const bowTipY_Top = bow.y - 50;
+    const bowTipY_Bot = bow.y + 50;
 
     // Draw String
     ctx.beginPath();
+    ctx.moveTo(bowTipX, bowTipY_Top);
     if (isDragging) {
-        ctx.moveTo(bow.x, bow.y - 40);
         ctx.lineTo(bow.x + pullX, bow.y + pullY);
-        ctx.lineTo(bow.x, bow.y + 40);
+        ctx.lineTo(bowTipX, bowTipY_Bot);
     } else {
-        ctx.moveTo(bow.x, bow.y - 40);
-        ctx.lineTo(bow.x, bow.y + 40);
+        ctx.lineTo(bowTipX, bowTipY_Bot);
     }
     ctx.strokeStyle = '#ddd';
     ctx.lineWidth = 2;
+    ctx.lineCap = 'butt';
+    ctx.stroke();
+
+    // Draw Bow Limbs
+    ctx.beginPath();
+    // Top Limb
+    ctx.moveTo(bow.x, bow.y - 10); // Top of grip
+    ctx.bezierCurveTo(bow.x + 20, bow.y - 25, bow.x + 5, bow.y - 45, bowTipX, bowTipY_Top);
+
+    // Bottom Limb
+    ctx.moveTo(bow.x, bow.y + 10); // Bottom of grip
+    ctx.bezierCurveTo(bow.x + 20, bow.y + 25, bow.x + 5, bow.y + 45, bowTipX, bowTipY_Bot);
+
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = bow.color;
+    ctx.stroke();
+
+    // Draw Grip (Handle)
+    ctx.beginPath();
+    ctx.moveTo(bow.x, bow.y - 10);
+    ctx.lineTo(bow.x, bow.y + 10);
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = '#5D4037'; // Darker brown
+    ctx.lineCap = 'butt';
     ctx.stroke();
 
     // Draw Target
@@ -267,18 +289,50 @@ function draw() {
     ctx.translate(drawArrowX, drawArrowY);
     ctx.rotate(rot);
 
+    // Arrow Dimensions
+    const arrowLen = 50;
+    const shaftWidth = 3;
+    const headLen = 10;
+    const featherLen = 12;
+    const featherHeight = 6;
+
+    // Draw Shaft (Wood texture color)
     ctx.beginPath();
-    ctx.moveTo(-20, 0);
-    ctx.lineTo(20, 0);
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = '#333';
+    ctx.moveTo(-arrowLen / 2, 0);
+    ctx.lineTo(arrowLen / 2, 0);
+    ctx.lineWidth = shaftWidth;
+    ctx.strokeStyle = '#8B4513'; // SaddleBrown
     ctx.stroke();
-    // Arrow head
+
+    // Draw Arrow Head (Steel color)
     ctx.beginPath();
-    ctx.moveTo(20, 0);
-    ctx.lineTo(15, -5);
-    ctx.lineTo(15, 5);
-    ctx.fillStyle = '#333';
+    ctx.moveTo(arrowLen / 2, 0);
+    ctx.lineTo(arrowLen / 2 - headLen, -headLen / 2);
+    ctx.lineTo(arrowLen / 2 - headLen, headLen / 2);
+    ctx.closePath();
+    ctx.fillStyle = '#708090'; // SlateGray
+    ctx.fill();
+    ctx.strokeStyle = '#2F4F4F';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Draw Fletching (Feathers - Red/White pattern usually, lets go with Red)
+    // Top feather
+    ctx.beginPath();
+    ctx.moveTo(-arrowLen / 2, 0);
+    ctx.lineTo(-arrowLen / 2 + 2, -featherHeight);
+    ctx.lineTo(-arrowLen / 2 + featherLen, -featherHeight);
+    ctx.lineTo(-arrowLen / 2 + featherLen - 2, 0);
+    ctx.fillStyle = '#CD5C5C'; // IndianRed
+    ctx.fill();
+
+    // Bottom feather
+    ctx.beginPath();
+    ctx.moveTo(-arrowLen / 2, 0);
+    ctx.lineTo(-arrowLen / 2 + 2, featherHeight);
+    ctx.lineTo(-arrowLen / 2 + featherLen, featherHeight);
+    ctx.lineTo(-arrowLen / 2 + featherLen - 2, 0);
+    ctx.fillStyle = '#CD5C5C';
     ctx.fill();
 
     ctx.restore();
