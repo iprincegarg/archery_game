@@ -3,7 +3,7 @@
 🎯 A lightweight, fun archery master game embedded right into Visual Studio Code!
 <br>
 <div align="center">
-    <img src="media/demo.gif" width="600" alt="Archery Master Demo">
+    <img src="https://raw.githubusercontent.com/iprincegarg/archery_game/refs/heads/main/media/demo.gif" width="600" alt="Archery Master Demo">
 </div>
 <br>
 

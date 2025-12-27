@@ -2,7 +2,7 @@
     "name": "vscode-archery-game",
     "displayName": "Archery Master",
     "description": "A lightweight archery master game for VS Code",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "license": "MIT",
     "publisher": "PrinceGarg",
     "icon": "media/icon.png",
